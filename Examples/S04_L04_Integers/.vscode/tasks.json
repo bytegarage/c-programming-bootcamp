@@ -1,0 +1,145 @@
+/**
+*  
+*   To compile just the current active file run the "build active file" Task.
+*
+*   To compile all source file in the workspace run the "build current directory" Task (remember
+*   that in this case you can have only one source file with a function named "main" in workspaceFolder).
+*/
+{
+    "version": "2.0.0",
+
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "clean build",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "command": "rm -rf ./build/",
+            "windows": {
+                "command": "rm -R .\\build\\"
+            }
+        },
+        {
+            "type": "shell",
+            "label": "make build dir",
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "command": "mkdir -p build",
+            "windows": {
+                "command": ".\\.vscode\\make_build_dir.bat\""
+            }
+        },
+
+        {
+            "type": "shell",
+            "label": "build active file",
+            "dependsOn": "make build dir",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "windows": {
+                "command": "gcc.exe",
+                "args": [
+                    "-std=c11",
+                    "-g",
+                    "-Wall",
+                    "-D__USE_MINGW_ANSI_STDIO=1",
+                    "${file}",
+                    "-o",
+                    "${workspaceFolder}\\build\\${fileBasenameNoExtension}.exe",
+                ]
+            },
+            "linux": {
+                "command": "/usr/bin/gcc",
+                "args": [
+                    "-std=c11",
+                    "-g",
+                    "-Wall",
+                    "${file}",
+                    "-o",
+                    "${workspaceFolder}/build/${fileBasenameNoExtension}"
+                ],
+            },
+            "osx": {
+                "command": "/usr/bin/clang",
+                "args": [
+                    "-std=c11",
+                    "-g",
+                    "-Wall",
+                    "${file}",
+                    "-o",
+                    "${workspaceFolder}/build/${fileBasenameNoExtension}"
+                ],
+            }
+        },
+
+        {
+            "type": "shell",
+            "label": "build current directory",
+            "dependsOn": "make build dir",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "windows": {
+                "command": "gcc.exe",
+                "args": [
+                    "-std=c11",
+                    "-g",
+                    "-Wall",
+                    "-D__USE_MINGW_ANSI_STDIO=1",
+                    "${workspaceFolder}\\*.c",
+                    "-o",
+                    "${workspaceFolder}\\build\\${fileBasenameNoExtension}.exe",
+                ]
+            },
+            "linux": {
+                "command": "/usr/bin/gcc",
+                "args": [
+                    "-std=c11",
+                    "-g",
+                    "-Wall",
+                    "${workspaceFolder}\\*.c",
+                    "-o",
+                    "${workspaceFolder}/build/${fileBasenameNoExtension}"
+                ],
+            },
+            "osx": {
+                "command": "/usr/bin/clang",
+                "args": [
+                    "-std=c11",
+                    "-g",
+                    "-Wall",
+                    "${workspaceFolder}\\*.c",
+                    "-o",
+                    "${workspaceFolder}/build/${fileBasenameNoExtension}"
+                ],
+            }
+        },
+
+        {
+            //Mac only: use if the external console does not open on launch
+            "label": "Open Terminal",
+            "type": "shell",
+            "command": "echo \"Mac only!\"",
+            "osx": {
+                "command": "osascript -e 'tell application \"Terminal\"\ndo script \"echo Ready\"\nend tell'",
+            },
+            "problemMatcher": []
+        }
+    ]
+}

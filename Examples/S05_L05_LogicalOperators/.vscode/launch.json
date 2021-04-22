@@ -1,0 +1,46 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Build and debug active file",
+            "type": "cppdbg",
+            "request": "launch",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": 
+            false,
+            "MIMode": "gdb",
+
+            "program": "${fileDirname}/build/${fileBasenameNoExtension}",
+
+            "linux": {
+               "miDebuggerPath": "/usr/bin/gdb", 
+            },
+
+            "windows": {
+                "program": "${fileDirname}\\build\\${fileBasenameNoExtension}.exe",
+                "miDebuggerPath": "gdb.exe",
+            },
+
+            "osx": {
+                "MIMode": "lldb",
+                "externalConsole": true,
+            },
+            
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+
+            "preLaunchTask": "build active file",
+        }
+    ]
+}

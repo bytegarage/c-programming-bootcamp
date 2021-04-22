@@ -1,0 +1,13 @@
+/* !!!
+* Add keybindings to:
+* Command Palette (Ctrl+Shift+P) -> Preferences: Open Keyboard Shortcutss -> Open Keyboard Shortcuts (top rigth icon)
+*
+* checkout: https://code.visualstudio.com/docs/getstarted/keybindings#
+*/
+[
+    {
+        "key": "ctrl+shift+alt+c",
+        "command": "workbench.action.tasks.runTask",
+        "args": "clean build"
+    }
+]
