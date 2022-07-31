@@ -111,7 +111,7 @@
                     "-std=c11",
                     "-g",
                     "-Wall",
-                    "${workspaceFolder}\\*.c",
+                    "${workspaceFolder}/*.c",
                     "-o",
                     "${workspaceFolder}/build/${fileBasenameNoExtension}"
                 ],
@@ -122,7 +122,7 @@
                     "-std=c11",
                     "-g",
                     "-Wall",
-                    "${workspaceFolder}\\*.c",
+                    "${workspaceFolder}/*.c",
                     "-o",
                     "${workspaceFolder}/build/${fileBasenameNoExtension}"
                 ],
